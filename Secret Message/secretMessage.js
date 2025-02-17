@@ -9,14 +9,19 @@ const maxCols = 4
 const maxRows = 3
 let gridObj = {}
 
+/**
+ * Fetch data from a Google Docs document, parse it, and generate a secret message.
+ * This function retrieves the document and extracts characters and their x/y coordinates
+ */
 const getData = async () => {
 
-    fetch(url)
+    // Fetch the document data from the URL
+    fetch(url)         
         .then(response => response.text())
         .then(data => {
-            const parser = new DOMParser()
-            const doc = parser.parseFromString(data, 'text/html')
-            const row = doc.getElementsByTagName("tr")
+            const parser = new DOMParser()                              // Create a new DOM parser
+            const doc = parser.parseFromString(data, 'text/html')       // Parse the document as HTML
+            const row = doc.getElementsByTagName("tr")                  // Get all table rows from the document
 
             // Get the characters and their x/y coordinates from the document 
             for (let rowIndex = 1; rowIndex < row.length; rowIndex++) {
@@ -27,13 +32,13 @@ const getData = async () => {
 
                     switch (colIndex) {
                         case 0:
-                            x = `${currentCol}`
+                            x = `${currentCol}`         // Extract x-coordinate
                             break
                         case 1:
-                            char = `${currentCol}`
+                            char = `${currentCol}`      // Extract character
                             break
                         case 2:
-                            y = `${currentCol}`
+                            y = `${currentCol}`         // Extract y-coordinate
                             break
                         default:
                             "invalid"
@@ -46,14 +51,13 @@ const getData = async () => {
                     x: `${x}`,
                     y: `${y}`
                 }
-
-                // Add the current row object to an array 
-                gridArray.push(rowObj)
+                
+                gridArray.push(rowObj)      // Add the current row object to an array 
             }
 
-            // Add the array of row objects to the main grid object
+            // Add the array of row objects to the main grid object & call the function to generate the secret message
             Object.assign(gridObj, gridArray)
-            getSecretMessage(gridObj)
+            getSecretMessage(gridObj)           
         })
         .catch(error => console.error('Error: ', error))
 }
@@ -66,9 +70,8 @@ const getData = async () => {
  * @param {Array} grid - Array of objects, each containing a char and its x/y coordinates 
  */
 const getSecretMessage = async (grid) => {
-
-    // Initialize a 2D array with empty spaces
-    let secretMessageArray = Array.from({ length: maxRows }, () => Array(maxCols).fill(" "))
+    
+    let secretMessageArray = Array.from({ length: maxRows }, () => Array(maxCols).fill(" "))        // Initialize a 2D array with empty spaces
 
     // Iterate over the grid of objects, each containing a character and its x/y coordinates
     for (let rowIndex in grid) {
@@ -78,14 +81,11 @@ const getSecretMessage = async (grid) => {
         let char = rowObj.char
         let x = rowObj.x
         let y = rowObj.y
-
-        // Place the character in the corresponding position in the secretMessage array
-        secretMessageArray[y][x] = char
+        
+        secretMessageArray[y][x] = char     // Place the character in the corresponding position in the secretMessage array 
     }
-
-    // Reverse the array to get correct layout for the secret message
-    secretMessageArray.reverse()
-
+    
+    secretMessageArray.reverse()            // Reverse the array to get correct layout for the secret message
     
     // Append characters from the secretMessageArray to the HTML document, formatting them into rows and cols
     let colIndex = 0
