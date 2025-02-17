@@ -17,12 +17,9 @@ in the document, and prints the grid of characters.
 - Any positions in the grid that do not have a specified character should be filled with a space character.
 
 ## Output: 
-- The function should log a graphic of the letter 'F' in the browser console.
+- The function should display the extracted Unicode characters in the browser in the shape of an 'F'
 
 ## How to run:
-1. Clone the repository
-2. Open index.html on a server
-3. Press CTRL + SHIFT + I to open the browser console and view the 'secret code'
-
-## Note
-The code is currently functioning, but I am still working on enhancing it
+1. Clone this repository to your local machine
+2. Serve the index.html file on a local server
+3. Open your browser, and you'll see the extracted Unicode characters arranged to form the shap of an 'F'
