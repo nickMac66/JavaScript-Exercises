@@ -58,6 +58,13 @@ const getData = async () => {
         .catch(error => console.error('Error: ', error))
 }
 
+/**
+ * Retrieve and display the secret message from the grid
+ * This function processes a grid of objects, each containing a char and its x/y coordinates,
+ * arranges the characters into a 2D array, and appends the formatted results to the HTML doc
+ * 
+ * @param {Array} grid - Array of objects, each containing a char and its x/y coordinates 
+ */
 const getSecretMessage = async (grid) => {
 
     // Initialize a 2D array with empty spaces
