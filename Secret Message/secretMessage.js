@@ -60,21 +60,27 @@ const getData = async () => {
 
 const getSecretMessage = async (grid) => {
 
+    // Initialize a 2D array with empty spaces
     let secretMessageArray = Array.from({ length: maxRows }, () => Array(maxCols).fill(" "))
 
     // Iterate over the grid of objects, each containing a character and its x/y coordinates
     for (let rowIndex in grid) {
 
+        // Extract character and its x/y coordinates from the current row object
         let rowObj = grid[rowIndex]
         let char = rowObj.char
         let x = rowObj.x
         let y = rowObj.y
 
+        // Place the character in the corresponding position in the secretMessage array
         secretMessageArray[y][x] = char
     }
 
+    // Reverse the array to get correct layout for the secret message
     secretMessageArray.reverse()
 
+    
+    // Append characters from the secretMessageArray to the HTML document, formatting them into rows and cols
     let colIndex = 0
     secretMessageArray.forEach(row => {
 
