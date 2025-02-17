@@ -1,13 +1,13 @@
 // URL of the Google Docs document to fetch
 const url = 'https://docs.google.com/document/d/e/2PACX-1vRMx5YQlZNa3ra8dYYxmv-QIQ3YJe8tbI3kqcuC7lQiZm-CSEznKfN_HYNSpoXcZIV3Y_O3YoUB1ecq/pub';
 
-const xCoordinates = [];
-const yCoordinates = [];
-const characters = [];
-let grid = {}
+const xCoordinates = []
+const yCoordinates = []
+const characters = []
 let gridArray = []
 const maxCols = 4
 const maxRows = 3
+let gridObj = {}
 
 const getData = async () => {
 
@@ -53,37 +53,48 @@ const getData = async () => {
             }
 
             // Add the array of row objects to the main grid object
-            Object.assign(grid, gridArray)
-            getSecretMessage(grid)
+            Object.assign(gridObj, gridArray)
+            getSecretMessage(gridObj)
         })
         .catch(error => console.error('Error: ', error))
 }
 
 const getSecretMessage = async (grid) => {
 
-    let secretMessage = [
-        [" ", " ", " ", " "],
-        [" ", " ", " ", " "],
-        [" ", " ", " ", " "]
-    ]
+    const secretMessageArray = Array.from({length: maxRows}, () => Array(maxCols).fill(" "))    
 
     for (let rowObj in grid) {
 
-        if (grid.hasOwnProperty(rowObj)) {                      
+        if (grid.hasOwnProperty(rowObj)) {
 
             // 0 = bottom left
-            secretMessage[2][0] = grid[0].char
-            secretMessage[1][0] = grid[1].char
-            secretMessage[0][0] = grid[2].char
-            secretMessage[1][1] = grid[3].char
-            secretMessage[0][1] = grid[4].char
-            secretMessage[1][2] = grid[5].char
-            secretMessage[0][2] = grid[6].char
-            secretMessage[0][3] = grid[7].char
-        }
-    }
+            secretMessageArray[2][0] = grid[0].char
+            secretMessageArray[1][0] = grid[1].char
+            secretMessageArray[0][0] = grid[2].char
+            secretMessageArray[1][1] = grid[3].char
+            secretMessageArray[0][1] = grid[4].char
+            secretMessageArray[1][2] = grid[5].char
+            secretMessageArray[0][2] = grid[6].char
+            secretMessageArray[0][3] = grid[7].char
+        }        
+    }    
 
-    secretMessage.forEach(row => {
+    let counter = 0
+    secretMessageArray.forEach(row => {
+
+        row.forEach(col => {
+
+            document.body.innerHTML += `${col}`
+            counter++
+
+            if (counter === maxCols) {
+                counter = 0
+                document.body.innerHTML += '<br>'
+            }
+        })
+    });
+
+    secretMessageArray.forEach(row => {
         console.log(row.join(''));
     });
 }
