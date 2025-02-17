@@ -22,4 +22,4 @@ in the document, and prints the grid of characters.
 ## How to run:
 1. Clone this repository to your local machine
 2. Serve the index.html file on a local server
-3. Open your browser, and you'll see the extracted Unicode characters arranged to form the shap of an 'F'
+3. Open your browser, and you'll see the extracted Unicode characters arranged to form the shape of an 'F'
