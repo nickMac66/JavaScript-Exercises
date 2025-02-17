@@ -14,7 +14,6 @@ const getData = async () => {
     fetch(url)
         .then(response => response.text())
         .then(data => {
-
             const parser = new DOMParser()
             const doc = parser.parseFromString(data, 'text/html')
             const row = doc.getElementsByTagName("tr")
@@ -61,41 +60,33 @@ const getData = async () => {
 
 const getSecretMessage = async (grid) => {
 
-    const secretMessageArray = Array.from({length: maxRows}, () => Array(maxCols).fill(" "))    
+    let secretMessageArray = Array.from({ length: maxRows }, () => Array(maxCols).fill(" "))
 
-    for (let rowObj in grid) {
+    // Iterate over the grid of objects, each containing a character and its x/y coordinates
+    for (let rowIndex in grid) {
 
-        if (grid.hasOwnProperty(rowObj)) {
+        let rowObj = grid[rowIndex]
+        let char = rowObj.char
+        let x = rowObj.x
+        let y = rowObj.y
 
-            // 0 = bottom left
-            secretMessageArray[2][0] = grid[0].char
-            secretMessageArray[1][0] = grid[1].char
-            secretMessageArray[0][0] = grid[2].char
-            secretMessageArray[1][1] = grid[3].char
-            secretMessageArray[0][1] = grid[4].char
-            secretMessageArray[1][2] = grid[5].char
-            secretMessageArray[0][2] = grid[6].char
-            secretMessageArray[0][3] = grid[7].char
-        }        
-    }    
+        secretMessageArray[y][x] = char
+    }
 
-    let counter = 0
+    secretMessageArray.reverse()
+
+    let colIndex = 0
     secretMessageArray.forEach(row => {
 
         row.forEach(col => {
-
             document.body.innerHTML += `${col}`
-            counter++
+            colIndex++
 
-            if (counter === maxCols) {
-                counter = 0
+            if (colIndex === maxCols) {
+                colIndex = 0
                 document.body.innerHTML += '<br>'
             }
         })
-    });
-
-    secretMessageArray.forEach(row => {
-        console.log(row.join(''));
     });
 }
 
