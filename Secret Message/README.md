@@ -17,9 +17,10 @@ in the document, and prints the grid of characters.
 - Any positions in the grid that do not have a specified character should be filled with a space character.
 
 ## Output: 
-- The function should display the extracted Unicode characters in the browser in the shape of an 'F'
+- The function should display the extracted Unicode characters in the browser console
 
 ## How to run:
 1. Clone this repository to your local machine
 2. Serve the index.html file on a local server
-3. Open your browser, and you'll see the extracted Unicode characters arranged to form the shape of an 'F'
+3. Launch your browser, press CTRL + SHIFT + I to access the console
+4. The Unicode characters will reveal the secret code 'BOECMXH'.  **You might need to zoom out to view the entire code**
