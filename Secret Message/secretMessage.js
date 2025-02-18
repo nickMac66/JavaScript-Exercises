@@ -1,5 +1,6 @@
 // URL of the Google Docs document to fetch
 const url = 'https://docs.google.com/document/d/e/2PACX-1vQGUck9HIFCyezsrBSnmENk5ieJuYwpt7YHYEzeNJkIb9OSDdx-ov2nRNReKQyey-cwJOoEKUhLmN9z/pub'
+// const url = 'https://docs.google.com/document/d/1U6EHJT_m8kcep4498nfnzPD9bD0uCnZmZC7CElMKYxU/edit?tab=t.0'
 let rowObjects = []
 let maxCols = 94
 let maxRows = 7
@@ -15,7 +16,7 @@ const getData = () => {
         .then(response => response.text())
         .then(data => {
             const parser = new DOMParser()                                  // Create a new DOM parser
-            const doc = parser.parseFromString(data, 'text/html')           // Parse the document as HTML            
+            const doc = parser.parseFromString(data, 'text/html')           // Parse the document as HTML  
             const tableRows = doc.getElementsByTagName("tr")                // Get all table rows from the document
 
             for (let i = 1; i < tableRows.length; i++) {
@@ -45,7 +46,7 @@ const getData = () => {
  * 
  * @param {Array} rowObjects - Array of objects, each containing a char and its x/y coordinates 
  */
-const getSecretMessage = async (rowObjects) => {
+const getSecretMessage = (rowObjects) => {
 
     let secretMessageArray = Array.from({ length: maxRows }, () => Array(maxCols).fill(" "))        // Initialize a 2D array with empty spaces
 
@@ -56,6 +57,8 @@ const getSecretMessage = async (rowObjects) => {
         let char = row.char
         secretMessageArray[y][x] = char
     })
+
+    // secretMessageArray.reverse()
 
     // Log the secret message in the browser console
     for (let i = 0; i < secretMessageArray.length; i++) {
