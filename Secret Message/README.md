@@ -22,5 +22,4 @@ in the document, and prints the grid of characters.
 ## How to run:
 1. Clone this repository to your local machine
 2. Serve the index.html file on a local server
-3. Launch your browser, press CTRL + SHIFT + I to access the console
-4. The Unicode characters will reveal the secret code 'BOECMXH'.  **You might need to zoom out to view the entire code**
+3. The Unicode characters will reveal the secret code 'BOECWXH'. 
