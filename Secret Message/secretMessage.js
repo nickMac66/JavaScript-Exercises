@@ -29,10 +29,10 @@ const getData = () => {
                     char: tableData[1].textContent,
                     y: tableData[2].textContent
                 }
-                
+
                 rowObjects.push(rowObject)                      // Add the row object to the array of row objects
             }
-            
+
             getSecretMessage(rowObjects)                        // Generate and display the secret message
 
         })
@@ -58,14 +58,20 @@ const getSecretMessage = (rowObjects) => {
         secretMessageArray[y][x] = char
     })
 
-    // secretMessageArray.reverse()
+    secretMessageArray.reverse()                // Reverse the array to set x/y origin to bottom left of the 2D grid    
+    
+    let div = document.createElement('div');    // Create a div element
+    
+    div.style.fontFamily = 'monospace'          // Apply monospace font to properly display the secret message
 
-    // Log the secret message in the browser console
+    // Print each row of the grid to the browser
     for (let i = 0; i < secretMessageArray.length; i++) {
-        let row = secretMessageArray[i]        
-        console.log(row.join(''))
+        div.innerHTML += secretMessageArray[i]
+        div.innerHTML += '<br>'
     }
+    
+    document.body.append(div);                  // Append the secret message to the document body
+
 }
 
-// Initiate the data fetching and secret message generation process
-getData()
+getData()                                       // Fetch the URL data and display the secret message
