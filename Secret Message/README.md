@@ -10,6 +10,8 @@ Write a function that takes in the URL for the Google Doc as an argument, retrie
 in the document, and prints the grid of characters.
 
 ## Requirements:
+- Pass this URL containing the coordinates to your function: https://docs.google.com/document/d/e/2PACX-1vQGUck9HIFCyezsrBSnmENk5ieJuYwpt7YHYEzeNJkIb9OSDdx-ov2nRNReKQyey-cwJOoEKUhLmN9z/pub
+
 - The document specifies the Unicode characters and their respective x and y coordinates in the grid.
 
 - The minimum possible value for these coordinates is 0. There is no upper limit, meaning the grid can be of any size.
