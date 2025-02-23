@@ -34,7 +34,6 @@ const getData = () => {
             }
 
             getSecretMessage(rowObjects)                        // Generate and display the secret message
-
         })
         .catch(error => console.error('Error: ', error))        // Log any errors that occur during the fetch operation
 }
@@ -48,7 +47,7 @@ const getData = () => {
  */
 const getSecretMessage = (rowObjects) => {
 
-    let secretMessageArray = Array.from({ length: maxRows }, () => Array(maxCols).fill(" "))        // Initialize a 2D array with empty spaces
+    let secretMessageArray = Array.from({ length: maxRows }, () => Array(maxCols).fill(""))        // Initialize a 2D array with empty spaces
 
     // Iterate over the row objects to populate the 2D array with characters
     rowObjects.forEach(row => {
@@ -59,17 +58,28 @@ const getSecretMessage = (rowObjects) => {
     })
 
     secretMessageArray.reverse()                // Reverse the array to set x/y origin to bottom left of the 2D grid    
-    
-    let div = document.createElement('div');    // Create a div element
-    
+
+    let div = document.createElement('div');    // Create a div element    
     div.style.fontFamily = 'monospace'          // Apply monospace font to properly display the secret message
 
     // Print each row of the grid to the browser
     for (let i = 0; i < secretMessageArray.length; i++) {
-        div.innerHTML += secretMessageArray[i]
-        div.innerHTML += '<br>'
+
+        let current = secretMessageArray[i]     // Current row in the 2D grid
+
+        current.forEach(val => {
+            
+            // Add spaces when necessary            
+            if (val === "") {
+                div.innerHTML += '&nbsp'        
+            }
+
+            div.innerHTML += val                // Print the current character
+        })
+
+        div.innerHTML += '<br>'                 // Add a line break at the end of each row of characters
     }
-    
+
     document.body.append(div);                  // Append the secret message to the document body
 
 }
